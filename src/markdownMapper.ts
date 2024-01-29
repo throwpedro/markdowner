@@ -30,7 +30,11 @@ export const buildHtml = (lines: string[]) => {
     let html = '';
     lines.forEach(line => {
         const tagName = mapMarkdownToHtmlTagName(line);
-        textContent = line.split(' ').slice(1).join(' ');
+        if (tagName !== 'p') {
+            textContent = line.split(' ').slice(1).join(' ');
+        } else {
+            textContent = line;
+        }
         html += `<${tagName}>${textContent}</${tagName}>`;
     });
     return html;
